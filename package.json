@@ -1,0 +1,13 @@
+{
+  "name": "MatchmakerPlayerIndex",
+  "version": "0.0.1",
+  "description": "Matchmaker API",
+  "dependencies": {
+    "pg": "~6.0.3"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "rewire": "^2.5.2",
+    "sinon": "^1.17.4"
+  }
+}
