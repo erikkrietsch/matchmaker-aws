@@ -2,6 +2,7 @@
   "name": "MatchmakerPlayerIndex",
   "version": "0.0.1",
   "description": "Matchmaker API",
+  "repository": "github.com/erikkrietsch/matchmaker-aws.git",
   "dependencies": {
     "pg": "~6.0.3"
   },
