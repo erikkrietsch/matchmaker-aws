@@ -20,11 +20,15 @@ describe('Matchmaker', function() {
 				]
 			}
 			this.client = {
+				connect: sinon.stub().yields(null),
 				query: sinon.stub().yields(null, this.playerData),
-				end: sinon.stub().yields(null)
+				end: sinon.stub()
+			},
+			this.pg = {
+				Client: sinon.stub().returns(this.client)
 			}
 
-			matchmaker.__set__("client", this.client);
+			matchmaker.__set__("pg", this.pg);
 		});
 
 		it('should return players', function(done) {
