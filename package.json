@@ -4,6 +4,7 @@
   "description": "Matchmaker API",
   "repository": "github.com/erikkrietsch/matchmaker-aws.git",
   "dependencies": {
+    "bluebird": "^3.5.0",
     "pg": "~6.0.3"
   },
   "devDependencies": {
