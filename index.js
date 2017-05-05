@@ -1,5 +1,5 @@
-var matchmaker = require('./lib/matchmaker');
+var matchmaker = require('./lib/matchmaker')
 
-exports.handler = function (event, context, callback) {
-	matchmaker.getPlayers(event, callback);
+exports.getPlayers = function (event, context, callback) {
+	matchmaker.getPlayers(event, callback)
 };
