@@ -3,3 +3,4 @@ deploy.env
 event.json
 .serverless
 credentials.yml
+npm-debug.log
