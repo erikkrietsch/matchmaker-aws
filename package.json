@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "description": "Matchmaker API",
   "repository": "github.com/erikkrietsch/matchmaker-aws.git",
+  "scripts": {
+    "test": "mocha ./**/*.spec.js"
+  },
   "dependencies": {
     "bluebird": "^3.5.0",
     "pg": "~6.0.3"
