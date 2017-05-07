@@ -27,6 +27,14 @@ provider:
       PGUSER: $<file(./credentials.yml):pg.user>
       PGPASSWORD: $<file(./credentials.yml):pg.pass>
       PGDATABASE: $<file(./credentials.yml):pg.db>
+  vpc:
+    securityGroupIds:
+      - sg-ac9fa6d7
+    subnetIds:
+      - subnet-89390dd1
+      - subnet-1b92886d
+      - subnet-4d84ae67
+      - subnet-0b878736
 
 # you can overwrite defaults here
 #  stage: dev
@@ -168,20 +176,19 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
+  getPlayer:
+    handler: index.getPlayer
+    events:
+      - http:
+          path: players/{playerId}
+          method: get
+
   listPlayers:
     handler: index.listPlayers
     events:
       - http:
           path: players
           method: get
-    vpc:
-      securityGroupIds:
-        - sg-ac9fa6d7
-      subnetIds:
-        - subnet-89390dd1
-        - subnet-1b92886d
-        - subnet-4d84ae67
-        - subnet-0b878736
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
