@@ -168,8 +168,8 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  getPlayers:
-    handler: index.getPlayers
+  listPlayers:
+    handler: index.listPlayers
     events:
       - http:
           path: players
