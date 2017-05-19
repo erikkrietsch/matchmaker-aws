@@ -2,21 +2,10 @@
 
 var matchmaker = require('./lib/matchmaker')
 var error = require('./lib/error')
+var router = require('./lib/router')
 
-exports.listPlayers = function (event, context, callback) {
-	matchmaker.listPlayers(event)
-	.then(results => {
-		let response = {
-			statusCode: 200,
-			body: JSON.stringify(results)
-		}
-		callback(null, response)
-	})
-	.catch(err => error.handle(err, callback))
-};
-
-exports.getPlayer = function (event, context, callback) {
-	matchmaker.getPlayer(event)
+exports.router = (event, context, callback) => {
+	router.route(event)
 	.then(results => {
 		let response = {
 			statusCode: 200,
