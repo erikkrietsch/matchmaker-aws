@@ -18,59 +18,41 @@ chai.use(function (chai, utils) {
   });
 });
 
+this.router = require('./lib/router')
+this.route = sinon.stub(this.router, 'route', (event) => {
+  if (event.path.includes("reject")) return Promise.reject(new Error("uh oh!"))
+  return Promise.resolve("data")
+})
+
+index.__set__("router", this.router)
 
 describe("index", () => {
-  beforeEach(() => {
-    this.player = { id: 1, name: "Joe Yo" }
-    this.players = [this.player]
-    this.listPlayers = (event) => {
-      return Promise.resolve(this.players)
-    }
-    this.getPlayer = (event) => {
-      return Promise.resolve(this.player)
-    }
-    this.matchmaker = {
-      listPlayers: this.listPlayers,
-      getPlayer: this.getPlayer
-    }
-    index.__set__("matchmaker", this.matchmaker)
-  })
+  describe("route", () => {
+    let event = {}
 
-  describe("listPlayers", (done) => {
-    it("should call the callback with player data", done => {
-      index.listPlayers({}, {}, (err, response) => {
-        expect(err).to.be.null
-        expect(JSON.parse(response.body)).to.deep.equal(this.players)
-        expect(response).to.be.a.validResponse
-        done()
+    beforeEach(() => {
+      event = {
+        path: "/players",
+        httpMethod: "GET"
+      }
+    })
+
+    it("should call the router.route method", (done) => {
+      index.router(event, null, (err, data) => {
+        expect(this.router.route.callCount).to.equal(1)
+        expect(this.router.route.calledWith(event)).to.be.true
+        done(err)
       })
     })
 
-    describe("when there are no players", () => {
-      it("should return a 404", done => {
-        this.matchmaker.listPlayers = event => {
-          return Promise.reject(new exceptions.NotFoundException("not found"))
-        }
-
-        index.listPlayers({}, {}, (err, response) => {
-          expect(err).to.be.null
-          expect(response).to.be.a.validResponse
-          expect(response.statusCode).to.equal(404)
-          expect(response.body).to.contain("not found")
-          done()
-        })
-      })
-    })
-
-  })
-
-  describe("getPlayer", (done) => {
-    it("should call the callback with player data", done => {
-      let event = { playerId: 1 }
-      index.getPlayer(event, {}, (err, obj) => {
+    it("should include an error when a Promise is rejected", (done) => {
+      event.path = "/reject"
+      index.router(event, null, (err, response) => {
         expect(err).to.be.null
-        expect(obj).to.be.validResponse
-        done()
+        expect(response.statusCode).to.equal(400)
+        expect(response.body).to.equal("uh oh!")
+        expect(response).to.be.validResponse
+        done(err)
       })
     })
   })
