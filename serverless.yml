@@ -23,10 +23,10 @@ provider:
   profile: grid
   variableSyntax: '\$<([ :a-zA-Z0-9._,\-\/\(\)]+?)>' # note there are no escaped slashes $<blah>
   environment:
-      PGHOST: $<file(./credentials.yml):pg.host>
-      PGUSER: $<file(./credentials.yml):pg.user>
-      PGPASSWORD: $<file(./credentials.yml):pg.pass>
-      PGDATABASE: $<file(./credentials.yml):pg.db>
+      PGHOST: $<file(./credentials.yml):pg.$<opt:stage>.host>
+      PGUSER: $<file(./credentials.yml):pg.$<opt:stage>.user>
+      PGPASSWORD: $<file(./credentials.yml):pg.$<opt:stage>.pass>
+      PGDATABASE: $<file(./credentials.yml):pg.$<opt:stage>.db>
   vpc:
     securityGroupIds:
       - sg-ac9fa6d7
