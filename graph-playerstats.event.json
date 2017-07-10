@@ -1,0 +1,5 @@
+{
+  "resource": "/graph",
+  "httpMethod": "POST",
+  "body": "{ stats { player { firstName }, wins, played, lastPlayed } }"
+}

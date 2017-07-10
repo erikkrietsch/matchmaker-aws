@@ -1,0 +1,5 @@
+{
+  "resource": "/graph",
+  "httpMethod": "POST",
+  "body": "{ player(id: 1) { firstName, lastName, slackHandle } }"
+}

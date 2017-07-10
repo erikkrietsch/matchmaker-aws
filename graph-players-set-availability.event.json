@@ -1,0 +1,5 @@
+{
+  "resource": "/graph",
+  "httpMethod": "POST",
+  "body": "{ setAvailability(id: 1, available: true) { player { id, slackHandle }, available, day } }"
+}

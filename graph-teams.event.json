@@ -1,0 +1,5 @@
+{
+  "resource": "/graph",
+  "httpMethod": "POST",
+  "body": "{ teams { id, player1 { firstName }, player2 { firstName } } }"
+}
